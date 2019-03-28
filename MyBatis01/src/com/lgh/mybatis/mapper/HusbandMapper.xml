@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lgh.mybatis.mapper.HusbandMapper">
+	<resultMap type="HusbandBean" id="husbandAndWife">
+		<id property="id" column="id" javaType="java.lang.Integer"/>
+		<result property="name" column="name" javaType="java.lang.String"/>
+		<association property="wife" column="id" javaType="WifeBean"
+		select="com.lgh.mybatis.mapper.WifeMapper.selectWifeByHusbandId"></association>
+	</resultMap>
+	<select id="selectHusbandById" resultType="HusbandBean">
+		select * from t_husband where id=#{id}
+	</select>
+	<select id="selectHusbandAndWife" resultMap="husbandAndWife" parameterType="int">
+		select * from t_husband where id=#{id}
+	</select>
+</mapper>
